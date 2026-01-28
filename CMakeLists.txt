@@ -8,3 +8,4 @@ include_directories(infinite-numbers)
 
 add_executable(Competitive_Programming
         infinite-numbers/main.cpp)
+add_executable(grid 1-basic-command/grid.cpp)
