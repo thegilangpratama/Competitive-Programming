@@ -10,3 +10,4 @@ add_executable(Competitive_Programming
         infinite-numbers/main.cpp)
 add_executable(grid basic/grid.cpp)
 add_executable(graph basic/graph.cpp)
+add_executable(linked_list basic/linked_list.cpp)
