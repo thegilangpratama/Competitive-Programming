@@ -11,3 +11,4 @@ add_executable(Competitive_Programming
 add_executable(grid basic/grid.cpp)
 add_executable(graph basic/graph.cpp)
 add_executable(linked_list basic/linked_list.cpp)
+add_executable(maps basic/maps.cpp)
