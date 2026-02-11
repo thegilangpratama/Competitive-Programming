@@ -23,8 +23,7 @@ void solve(int tc) {
         string row = "";
 
         for (int j = 0; j < m; ++j) {
-            if (grid[i][j] == 0)
-                ++cntK;
+            if (grid[i][j] == 0) ++cntK;
 
             // Always push
             if (grid[i][j] == 0)
