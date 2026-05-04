@@ -1,38 +1,37 @@
 #include <iostream>
-#include <climits>
 #include <cmath>
 
 using namespace std;
 
-const int MAX_N = 12;
-
-int posX[MAX_N], posY[MAX_N];
-int n;
+int x[20], y[20];
+bool visited[20];
 int answer;
+int n;
 
-int dist(int from, int to) {
-    return abs(posX[from] - posX[to]) + abs(posY[from] - posY[to]);
+int get_dist(int i, int j) {
+    return abs(x[i] - x[j]) + abs(y[i] - y[j]);
 }
 
-void solve(int current, bool visited[], int count, int cost) {
-    if (cost >= answer) return;
+void solve(int curr, int count, int dist) {
+    // pruning the answer
+    if (dist >= answer) return;
 
     if (count == n) {
-        answer = min(answer, cost + dist(current, n + 1));
+        int final_dist = dist + get_dist(curr, n + 1);
+        if (final_dist < answer) answer = final_dist;
         return;
     }
 
     for (int i = 1; i <= n; ++i) {
         if (!visited[i]) {
             visited[i] = true;
-            solve(i, visited, count + 1, cost + dist(current, i));
+            solve(i, count + 1, dist + get_dist(curr, i));
             visited[i] = false;
         }
     }
 }
 
-
-int main() {
+int main () {
     // ---------------------------------------------------------
     // Automated Input test case
     // ---------------------------------------------------------
@@ -46,27 +45,18 @@ int main() {
     // We build the full path to sample.txt so the program never gets lost.
     freopen((path + "/case.txt").c_str(), "r", stdin);
 
-    int tc;
-
-    cin >> tc;
-
-    for (int i = 1; i <= tc; ++i) {
+    // amount of test cases
+    for (int tc = 1; tc <= 3; ++tc) {
         cin >> n;
-        answer = INT_MAX;
-
-        cin >> posX[n +1] >> posY[n +1];
-        cin >> posX[0] >> posY[0];
-
-        for (int i = 1; i <= n; ++i) {
-            cin >> posX[i] >> posY[i];
+        cin >> x[0] >> y[0];
+        cin >> x[n + 1] >> y[n + 1];
+        for (int i = 1; i <= n; ++ i) {
+            cin >> x[i] >> y[i];
+            visited[i] = false;
         }
+        answer = 1e9;
+        solve(0,0,0);
 
-        bool visited[MAX_N] = {false};
-
-        solve(0, visited, 0, 0);
-
-        cout << "#" << i << " " << answer << endl;
+        cout << "#" << tc << " " << answer << endl;
     }
-
-    return 0;
 }
